@@ -1,0 +1,12 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /
+
+spring:
+  #  ˝æ›‘¥≈‰÷√
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/db_min?useUnicode=true&characterEncoding=utf-8&useSSL=false

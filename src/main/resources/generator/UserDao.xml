@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.daistudy.min.mapper.UserDao">
+  <resultMap id="BaseResultMap" type="org.daistudy.min.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="del_flag" jdbcType="BIT" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `name`, `password`, created_time, created_by, updated_time, updated_by, del_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="org.daistudy.min.entity.User" useGeneratedKeys="true">
+    insert into user (`name`, `password`, created_time, 
+      created_by, updated_time, updated_by, 
+      del_flag)
+    values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="org.daistudy.min.entity.User" useGeneratedKeys="true">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.daistudy.min.entity.User">
+    update user
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.daistudy.min.entity.User">
+    update user
+    set `name` = #{name,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
